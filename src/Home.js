@@ -17,6 +17,7 @@ const Home = () => {
   };
 
   const today = getToday();
+  // const today = 'Tuesday';
 
   let satClass = 'sat';
   let sunClass = 'sun';
@@ -98,24 +99,31 @@ const Home = () => {
 
   if (sat) {
     satClass = 'sat selected';
+    window.scrollTo(0, 0);
   }
   if (sun) {
     sunClass = 'sun selected';
+    window.scrollTo(0, 0);
   }
   if (mon) {
     monClass = 'mon selected';
+    window.scrollTo(0, 0);
   }
   if (tue) {
     tueClass = 'tue selected';
+    window.scrollTo(0, 0);
   }
   if (wed) {
     wedClass = 'wed selected';
+    window.scrollTo(0, 0);
   }
   if (thu) {
     thuClass = 'thu selected';
+    window.scrollTo(0, 0);
   }
   if (fri) {
     friClass = 'fri selected';
+    window.scrollTo(0, 0);
   }
 
   const appContext = useContext(AppContext);
@@ -165,147 +173,158 @@ const Home = () => {
     getThursday();
     getFriday();
 
+    // window.addEventListener('wheel', event => {
+    //   let delta = Math.sign(event.deltaY);
+    //   // console.info(delta);
+    //   if (delta === 1) {
+    //     setSun(true);
+    //     setSat(false);
+    //   }
+    //   if (delta === -1) {
+    //     setSat(true);
+    //     setSun(false);
+    //   }
+    // });
+
     // eslint-disable-next-line
   }, []);
+
   return (
-    <div>
-      <div className='day-tab'>
-        <span onClick={onSat} className={satClass}>
-          {today === 'Saturday' ? 'Today' : 'Saturday'}
-        </span>
-
-        <span onClick={onSun} className={sunClass}>
-          {today === 'Sunday' ? 'Today' : 'Sunday'}
-        </span>
-
-        <span onClick={onMon} className={monClass}>
-          {today === 'Monday' ? 'Today' : 'Monday'}
-        </span>
-
-        <span onClick={onTue} className={tueClass}>
-          {today === 'Tuesday' ? 'Today' : 'Tuesday'}
-        </span>
-
-        <span onClick={onWed} className={wedClass}>
-          {today === 'Wednesday' ? 'Today' : 'Wednesday'}
-        </span>
-
-        <span onClick={onThu} className={thuClass}>
-          {today === 'Thursday' ? 'Today' : 'Thursday'}
-        </span>
-
-        <span onClick={onFri} className={friClass}>
-          {today === 'Friday' ? 'Today' : 'Friday'}
-        </span>
+    <div className='container home'>
+      <div className='anime-container'>
+        {sat &&
+          saturday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
+        {sun &&
+          sunday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
+        {mon &&
+          monday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
+        {tue &&
+          tuesday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
+        {wed &&
+          wednesday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
+        {thu &&
+          thursday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
+        {fri &&
+          friday.map(anime => (
+            <div key={anime.mal_id}>
+              <img className='anime-poster' src={anime.image_url} alt='' />
+              <a
+                className='my-anime-list-link'
+                href={anime.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                My Anime List
+              </a>
+              <p className='anime-title'>{anime.title}</p>
+            </div>
+          ))}
       </div>
+      <div className='day-tab'>
+        <div onClick={onSat} className={satClass}>
+          {today === 'Saturday' ? 'Today' : 'Saturday'}
+        </div>
 
-      <div className='container'>
-        <div className='anime-container'>
-          {sat &&
-            saturday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
-          {sun &&
-            sunday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
-          {mon &&
-            monday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
-          {tue &&
-            tuesday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
-          {wed &&
-            wednesday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
-          {thu &&
-            thursday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
-          {fri &&
-            friday.map(anime => (
-              <div key={anime.mal_id}>
-                <img className='anime-poster' src={anime.image_url} alt='' />
-                <a
-                  className='my-anime-list-link'
-                  href={anime.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  My Anime List
-                </a>
-                <p className='anime-title'>{anime.title}</p>
-              </div>
-            ))}
+        <div onClick={onSun} className={sunClass}>
+          {today === 'Sunday' ? 'Today' : 'Sunday'}
+        </div>
+
+        <div onClick={onMon} className={monClass}>
+          {today === 'Monday' ? 'Today' : 'Monday'}
+        </div>
+
+        <div onClick={onTue} className={tueClass}>
+          {today === 'Tuesday' ? 'Today' : 'Tuesday'}
+        </div>
+
+        <div onClick={onWed} className={wedClass}>
+          {today === 'Wednesday' ? 'Today' : 'Wednesday'}
+        </div>
+
+        <div onClick={onThu} className={thuClass}>
+          {today === 'Thursday' ? 'Today' : 'Thursday'}
+        </div>
+
+        <div onClick={onFri} className={friClass}>
+          {today === 'Friday' ? 'Today' : 'Friday'}
         </div>
       </div>
     </div>
