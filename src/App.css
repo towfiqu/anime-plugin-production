@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+body {
+  background: #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+html {
   color: white;
+  font-family: sans-serif, Helvetica, sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  width: 50%;
+  margin: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.anime-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-gap: 10px;
+}
+
+.anime-poster {
+  width: 150px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.my-anime-list-link {
+  text-decoration: none;
+  padding: 5px 8px;
+  background: #2e51a2;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.anime-title {
+  font-size: 14px;
+}
+
+.day-tab {
+  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+}
+
+.sat,
+.sun,
+.mon,
+.tue,
+.wed,
+.thu,
+.fri {
+  padding: 4px 8px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.sat:hover,
+.sun:hover,
+.mon:hover,
+.tue:hover,
+.wed:hover,
+.thu:hover,
+.fri:hover {
+  padding: 4px 8px;
+  background: #ddd;
+  cursor: pointer;
+  margin: 2px;
+  color: black;
+  border-radius: 2px;
+}
+
+.selected {
+  padding: 4px 8px;
+  background: #ddd;
+  cursor: pointer;
+  color: black;
+  border-radius: 2px;
 }
