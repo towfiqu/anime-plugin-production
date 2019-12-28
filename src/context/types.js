@@ -5,3 +5,5 @@ export const GET_TUESDAY = 'GET_TUESDAY';
 export const GET_WEDNESDAY = 'GET_WEDNESDAY';
 export const GET_THURSDAY = 'GET_THURSDAY';
 export const GET_FRIDAY = 'GET_FRIDAY';
+export const MODAL_TRIGGER = 'MODAL_TRIGGER';
+export const LOADING = 'LOADING';

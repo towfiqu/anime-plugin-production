@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Modal from './Modal';
+import Backdrop from './Backdrop';
 import AppContext from './context/appContext';
+import Spinner from './Spinner';
 const days = [
   'Sunday',
   'Monday',
@@ -17,7 +20,6 @@ const Home = () => {
   };
 
   const today = getToday();
-  // const today = 'Tuesday';
 
   let satClass = 'sat';
   let sunClass = 'sun';
@@ -142,163 +144,398 @@ const Home = () => {
     wednesday,
     thursday,
     friday,
+    modalTrigger,
+    setModalTrigger,
+    loading,
   } = appContext;
   useEffect(() => {
-    if (today === 'Saturday') {
-      setSat(true);
-    }
-    if (today === 'Sunday') {
-      setSun(true);
-    }
-    if (today === 'Monday') {
-      setMon(true);
-    }
-    if (today === 'Tuesday') {
-      setTue(true);
-    }
-    if (today === 'Wednesday') {
-      setWed(true);
-    }
-    if (today === 'Thursday') {
-      setThu(true);
-    }
-    if (today === 'Friday') {
-      setFri(true);
-    }
-    getSaturday();
-    getSunday();
-    getMonday();
-    getTuesday();
-    getWednesday();
-    getThursday();
-    getFriday();
+    if (!loading) {
+      getSaturday();
+      getSunday();
+      getMonday();
+      getTuesday();
+      getWednesday();
+      getThursday();
+      getFriday();
 
-    // window.addEventListener('wheel', event => {
-    //   let delta = Math.sign(event.deltaY);
-    //   // console.info(delta);
-    //   if (delta === 1) {
-    //     setSun(true);
-    //     setSat(false);
-    //   }
-    //   if (delta === -1) {
-    //     setSat(true);
-    //     setSun(false);
-    //   }
-    // });
+      if (today === 'Saturday') {
+        setSat(true);
+      }
+      if (today === 'Sunday') {
+        setSun(true);
+      }
+      if (today === 'Monday') {
+        setMon(true);
+      }
+      if (today === 'Tuesday') {
+        setTue(true);
+      }
+      if (today === 'Wednesday') {
+        setWed(true);
+      }
+      if (today === 'Thursday') {
+        setThu(true);
+      }
+      if (today === 'Friday') {
+        setFri(true);
+      }
+    }
 
     // eslint-disable-next-line
   }, []);
 
+  const findLink = mal_id => {
+    const link = localStorage.getItem(mal_id);
+    return link;
+  };
+
+  const [id, setId] = useState('');
+
+  const onButtonClick = mal_id => {
+    setModalTrigger(true);
+    setId(mal_id);
+  };
+
+  const onRemoveButton = mal_id => {
+    localStorage.removeItem(mal_id);
+    setModalTrigger(false);
+  };
+
+  let classDayTab = 'day-tab';
+  if (modalTrigger) {
+    classDayTab = 'day-tab-hide';
+  }
+
+  if (loading) return <Spinner />;
+
   return (
     <div className='container home'>
+      {modalTrigger && <Modal mal_id={id} />}
+      {modalTrigger && <Backdrop />}
       <div className='anime-container'>
         {sat &&
           saturday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
         {sun &&
           sunday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
         {mon &&
           monday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
         {tue &&
           tuesday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
         {wed &&
           wednesday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
         {thu &&
           thursday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
         {fri &&
           friday.map(anime => (
             <div key={anime.mal_id}>
-              <img className='anime-poster' src={anime.image_url} alt='' />
-              <a
-                className='my-anime-list-link'
-                href={anime.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                My Anime List
-              </a>
+              <div className='hover-container'>
+                <img className='anime-poster' src={anime.image_url} alt='' />
+                <div className='overlay'>
+                  <a
+                    className='my-anime-list-link'
+                    href={anime.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    My Anime List
+                  </a>
+                  <button
+                    className='add-watch-link'
+                    onClick={() => onButtonClick(anime.mal_id)}
+                  >
+                    {findLink(anime.mal_id) ? 'Update Link' : 'Add Link'}
+                  </button>
+                  {findLink(anime.mal_id) && (
+                    <button
+                      className='remove-watch-link'
+                      onClick={() => onRemoveButton(anime.mal_id)}
+                    >
+                      Remove Link
+                    </button>
+                  )}
+                </div>
+              </div>
+              {findLink(anime.mal_id) && (
+                <a
+                  className='watch-link'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={findLink(anime.mal_id)}
+                  alt=''
+                >
+                  Watch
+                </a>
+              )}
+
               <p className='anime-title'>{anime.title}</p>
             </div>
           ))}
       </div>
-      <div className='day-tab'>
+      <div className={classDayTab}>
         <div onClick={onSat} className={satClass}>
           {today === 'Saturday' ? 'Today' : 'Saturday'}
         </div>

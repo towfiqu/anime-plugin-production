@@ -5,11 +5,16 @@ body {
 html {
   color: white;
   font-family: sans-serif, Helvetica, sans-serif;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+button {
+  outline: none;
 }
 
 .container {
-  width: 70%;
+  /* width: 60%; */
+  width: 700px;
   margin: auto;
 }
 .home {
@@ -23,21 +28,26 @@ html {
   grid-template-columns: repeat(auto-fill, 150px);
   grid-gap: 10px;
   margin-top: 50px;
+  margin-left: 30px;
 }
 
 .anime-poster {
   width: 150px;
   height: 200px;
-  margin-bottom: 10px;
+  grid-column: 1/-1;
+  grid-row: 1/-1;
 }
 
 .my-anime-list-link {
   text-decoration: none;
-  padding: 5px 8px;
-  background: #2e51a2;
+  padding: 6px 8px;
+  background: #1e439b;
   color: white;
   border-radius: 4px;
   font-size: 12px;
+  margin-bottom: 10px;
+  width: 70%;
+  text-align: center;
 }
 
 .anime-title {
@@ -50,7 +60,17 @@ html {
   top: 0;
   right: 0;
   margin-top: 45px;
-  margin-right: 300px;
+  margin-right: 30%;
+}
+
+.day-tab-hide {
+  display: none;
+  grid-column: span 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 45px;
+  margin-right: 450px;
 }
 
 .sat,
@@ -86,4 +106,128 @@ html {
   cursor: pointer;
   color: black;
   border-radius: 2px;
+}
+
+.input-link {
+  border-style: none;
+  border-radius: 4px;
+  margin-top: 15px;
+  width: 90%;
+  padding: 20px 15px;
+}
+
+.add-link {
+  border-style: none;
+  border-radius: 4px;
+  padding: 15px;
+  margin-left: 170px;
+  width: 30%;
+  margin-top: 5px;
+  background: darkgreen;
+  color: white;
+  font-size: 18px;
+}
+
+.watch-link {
+  text-decoration: none;
+  padding: 5px 8px;
+  font-size: 12px;
+  color: white;
+  background: darkgreen;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  border-radius: 4px;
+  width: 90%;
+}
+
+.overlay {
+  background: rgb(236, 236, 236, 0.7);
+
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  transition: 0.3s;
+  transform: translateY(100%);
+}
+
+.add-watch-link {
+  border-style: none;
+  background: black;
+  color: #eee;
+  border-radius: 4px;
+  padding: 8px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  width: 80%;
+  text-align: center;
+}
+
+.remove-watch-link {
+  border-style: none;
+  margin-top: 10px;
+  background: darkred;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  width: 80%;
+}
+
+.hover-container {
+  display: grid;
+  overflow: hidden;
+}
+
+.hover-container:hover .overlay {
+  transform: translateY(0);
+}
+
+.modal {
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+  width: 555px;
+  position: fixed;
+  top: 20vh;
+  left: 20;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 1300px) {
+  .day-tab {
+    margin-right: 25%;
+  }
+}
+@media (max-width: 1200px) {
+  .day-tab {
+    margin-right: 20%;
+  }
+}
+@media (max-width: 1000px) {
+  .day-tab {
+    margin-right: 15%;
+  }
+}
+@media (max-width: 800px) {
+  .day-tab {
+    margin-right: 10%;
+  }
+}
+@media (max-width: 700px) {
+  .day-tab {
+    margin-right: 5%;
+  }
 }
