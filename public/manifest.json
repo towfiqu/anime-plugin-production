@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Anime Plugin",
-  "description": "A plugin to show what animes airing on a given day and that week",
-  "version": "3.0.0",
+  "description": "A plugin to show what animes airing on that week",
+  "version": "3.5.0",
 
   "browser_action": {
     "default_icon": "logo-small.png"

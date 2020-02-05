@@ -3,28 +3,11 @@ import AppContext from './appContext';
 import AppReducer from './appReducer';
 import axios from 'axios';
 
-import {
-  GET_FRIDAY,
-  GET_MONDAY,
-  GET_SATURDAY,
-  GET_SUNDAY,
-  GET_THURSDAY,
-  GET_TUESDAY,
-  GET_WEDNESDAY,
-  MODAL_TRIGGER,
-  LOADING,
-} from './types';
+import { GET_ANIMES, MODAL_TRIGGER, LOADING } from './types';
 
 const AppState = props => {
   const initialState = {
-    saturday: [],
-    sunday: [],
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-
+    animes: [],
     modalTrigger: false,
     loading: false,
   };
@@ -53,105 +36,65 @@ const AppState = props => {
     });
   };
 
-  const getSaturday = async () => {
+  const getAnimes = async dayOfWeek => {
     setLoading(true);
     const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/saturday`,
+      `https://jikan1.p.rapidapi.com/schedule/${dayOfWeek}`,
       config,
     );
-    dispatch({
-      type: GET_SATURDAY,
-      payload: res.data.saturday,
-    });
-  };
-  const getSunday = async () => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/sunday`,
-      config,
-    );
-    dispatch({
-      type: GET_SUNDAY,
-      payload: res.data.sunday,
-    });
-  };
-  const getMonday = async () => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/monday`,
-      config,
-    );
-    dispatch({
-      type: GET_MONDAY,
-      payload: res.data.monday,
-    });
-  };
-  const getTuesday = async () => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/tuesday`,
-      config,
-    );
-    dispatch({
-      type: GET_TUESDAY,
-      payload: res.data.tuesday,
-    });
-  };
-  const getWednesday = async () => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/wednesday`,
-      config,
-    );
-    dispatch({
-      type: GET_WEDNESDAY,
-      payload: res.data.wednesday,
-    });
-  };
-  const getThursday = async () => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/thursday`,
-      config,
-    );
-    dispatch({
-      type: GET_THURSDAY,
-      payload: res.data.thursday,
-    });
-  };
-  const getFriday = async () => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://jikan1.p.rapidapi.com/schedule/friday`,
-      config,
-    );
-    dispatch({
-      type: GET_FRIDAY,
-      payload: res.data.friday,
-    });
+    if (dayOfWeek === 'saturday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.saturday,
+      });
+    }
+    if (dayOfWeek === 'sunday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.sunday,
+      });
+    }
+    if (dayOfWeek === 'monday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.monday,
+      });
+    }
+    if (dayOfWeek === 'tuesday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.tuesday,
+      });
+    }
+    if (dayOfWeek === 'wednesday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.wednesday,
+      });
+    }
+    if (dayOfWeek === 'thursday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.thursday,
+      });
+    }
+    if (dayOfWeek === 'friday') {
+      dispatch({
+        type: GET_ANIMES,
+        payload: res.data.friday,
+      });
+    }
   };
 
   return (
     <AppContext.Provider
       value={{
-        saturday: state.saturday,
-        sunday: state.sunday,
-        monday: state.monday,
-        tuesday: state.tuesday,
-        wednesday: state.wednesday,
-        thursday: state.thursday,
-        friday: state.friday,
+        animes: state.animes,
         modalTrigger: state.modalTrigger,
         loading: state.loading,
         setLoading,
         setModalTrigger,
-        getSaturday,
-        getSunday,
-        getMonday,
-        getTuesday,
-        getWednesday,
-        getThursday,
-        getFriday,
+        getAnimes,
       }}
     >
       {props.children}

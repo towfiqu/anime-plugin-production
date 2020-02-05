@@ -13,7 +13,6 @@ button {
 }
 
 .container {
-  /* width: 60%; */
   width: 700px;
   margin: auto;
 }
@@ -27,8 +26,7 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fill, 150px);
   grid-gap: 10px;
-  margin-top: 50px;
-  margin-left: 30px;
+  margin-top: 20px;
 }
 
 .anime-poster {
@@ -59,39 +57,21 @@ button {
   position: fixed;
   top: 0;
   right: 0;
-  margin-top: 45px;
+  margin-top: 55px;
   margin-right: 30%;
 }
 
 .day-tab-hide {
   display: none;
-  grid-column: span 1;
-  position: fixed;
-  top: 0;
-  right: 0;
-  margin-top: 45px;
-  margin-right: 450px;
 }
 
-.sat,
-.sun,
-.mon,
-.tue,
-.wed,
-.thu,
-.fri {
+.day {
   padding: 4px 8px;
   cursor: pointer;
   margin: 4px;
 }
 
-.sat:hover,
-.sun:hover,
-.mon:hover,
-.tue:hover,
-.wed:hover,
-.thu:hover,
-.fri:hover {
+.day:hover {
   padding: 4px 8px;
   background: #ddd;
   cursor: pointer;
