@@ -55,12 +55,29 @@ const Home = () => {
   const onSelectDay = selected_day => {
     localStorage.setItem('selected_day', selected_day);
     const all_days = document.querySelectorAll('.day');
+
     all_days.forEach(day => {
       if (day === selected_day) {
         localStorage.setItem('selected_day', day);
       }
     });
   };
+
+  const changeBG = dayName => {
+    const all_days = document.querySelectorAll('.day');
+    all_days.forEach(day => {
+      if (day.classList.contains(dayName)) {
+        day.classList.add('selected');
+      }
+    });
+  };
+
+  const getSelectedDay = () => {
+    return localStorage.getItem('selected_day').toString();
+  };
+  setTimeout(() => {
+    changeBG(getSelectedDay());
+  }, 10);
 
   const onDayClick = day => {
     getAnimes(day.toLowerCase());
@@ -150,8 +167,14 @@ const Home = () => {
 
         <div className={classDayTab}>
           {days.map((day, index) => (
-            <div className='day' key={index} onClick={() => onDayClick(day)}>
-              {day === today ? 'Today' : day}
+            <div
+              className={`day ${day}`}
+              key={index}
+              onClick={() => onDayClick(day)}
+            >
+              {' '}
+              {day}
+              {/* {day === today ? 'Today' : day} */}
             </div>
           ))}
         </div>
